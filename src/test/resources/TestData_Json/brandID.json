@@ -1,0 +1,32 @@
+[
+  {
+    "BrandID": "04199342",
+    "CardHolder": "AB de Villiers",
+	"CardNumber": "5553042241984105",
+	"Expiry": "07/28",
+	"CVV": "123",
+	"RunFlag": "Master05",
+	"ExpectedStatus": "Fail",
+	"PSP" :"Easybuzz"
+  },
+  {
+    "BrandID": "null",
+    "CardHolder": "AB de Villiers",
+	"CardNumber": "5553042241984105",
+	"Expiry": "07/28",
+	"CVV": "123",
+	"RunFlag": "Master05",
+	"ExpectedStatus": "Fail",
+	"PSP" :"Easybuzz"
+  },
+  {
+    "BrandID": "",
+    "CardHolder": "AB de Villiers",
+	"CardNumber": "5553042241984105",
+	"Expiry": "07/28",
+	"CVV": "123",
+	"RunFlag": "Master05",
+	"ExpectedStatus": "Fail",
+	"PSP" :"Easybuzz"
+  }
+]

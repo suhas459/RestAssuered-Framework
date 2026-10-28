@@ -1,0 +1,235 @@
+<html>
+<head>
+<title>TestNG:  Default test</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>Default test</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>1/0/0</td>
+</tr><tr>
+<td>Started on:</td><td>Tue Jul 14 12:15:11 IST 2026</td>
+</tr>
+<tr><td>Total time:</td><td>844 seconds (844054 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='purchase.email.Purchase()'><b>Purchase</b><br>Test class: purchase.email<br>Parameters: {CardNumber=5553042241984105, CVV=123, RunFlag=TRUE, RouteToMidOrBank=easebuzz_card, PartialMerchant=Suhas, PSP=easybuzz, MaxAmount=2500, CardholderName=Yash Bahubali, Merchant=SuhasM, RouteToBankMid=Route to Mid, Currency=INR, MinAmount=1000, DefaultAmount=100, PaymentMethod=MASTER, Expiry=07/28}, {Status=Pass, TestData=test123@example.com}<br/>
+<a href="#Output-2144647660" onClick='toggleBox("Output-2144647660", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-2144647660" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-2144647660">
+Email test case will run for this PSP: easybuzz<br/>
+Amount Inputs → Min: 1000.0, Max: 2500.0, Provided: 100.0<br/>
+⚠ Amount outside valid range (1000.0–2500.0). Provided: 100.0. Using safe fallback value.<br/>
+Generated First Name: div5a7<br/>
+Purchase ID: 6a55db17fd20a7634e2b6f09<br/>
+Checkout URL: https://newmodules2.choicepay.ca/payments/61837b9e94a79c3002b50e2b9d50a57f/<br/>
+Email: test123@example.com → HTTP Status: 202<br/>
+Response Body: {
+    "purchaseId": "6a55db17fd20a7634e2b6f09",
+    "client": {
+        "customerId": "NA",
+        "email": "test123@example.com",
+        "phone": "+1111111111",
+        "full_name": "div5a7",
+        "street_address": "Main gate",
+        "country": "US",
+        "city": "Paris",
+        "zip_code": "20001",
+        "cc": [
+            
+        ],
+        "bcc": [
+            
+        ],
+        "stateCode": "QLD"
+    },
+    "updated_on": 1784011543,
+    "type": "purchase",
+    "paymentMethod": "MASTER",
+    "amountUnit": "MAJOR",
+    "errorMsg": "",
+    "errorCode": "NA",
+    "force_recurring": false,
+    "created_on": 1784011543,
+    "smartRetryCount": 0,
+    "smartRetry": false,
+    "merchantRef": "6a55db17fd20a7634e2b6f09",
+    "purchase": {
+        "currency": "INR",
+        "products": [
+            {
+                "name": "Cricket bat",
+                "quantity": 1.0,
+                "price": 1750.0,
+                "discount": 0,
+                "tax_percent": "0.00"
+            }
+        ],
+        "total": 1750.0,
+        "requestAmount": 1750.0,
+        "language": "en",
+        "notes": "",
+        "debt": 0,
+        "total_formatted": 1.0,
+        "taxAmount": 0.0,
+        "taxPercent": 0.0,
+        "request_client_details": [
+            
+        ],
+        "timezone": "MIT",
+        "email_message": ""
+    },
+    "issuer_details": {
+        "website": "",
+        "legal_street_address": "",
+        "legal_country": "",
+        "legal_city": "",
+        "legal_zip_code": "",
+        "bank_accounts": [
+            {
+                
+            }
+        ],
+        "legal_name": "TestBrandId",
+        "brand_name": "TestBrandId",
+        "registration_number": "",
+        "tax_number": ""
+    },
+    "transaction_data": {
+        "payment_method": "",
+        "flow": "payform",
+        "extra": {
+            
+        },
+        "country": "",
+        "attempts": [
+            
+        ]
+    },
+    "status": "CREATED",
+    "status_history": [
+        {
+            "status": "created",
+            "timestamp": 1784011543
+        }
+    ],
+    "is_test": false,
+    "brand_id": "dd3f7271-ae31-4961-a37d-dcfec0817470",
+    "send_receipt": false,
+    "is_recurring_token": false,
+    "skip_capture": false,
+    "reference_generated": "PS2436",
+    "issued": "2026-07-14",
+    "due": 1784011543,
+    "refund_upto": 0,
+    "cc_descriptor": "",
+    "fraudScore": "NA",
+    "trustScore": "NA",
+    "extraFee": "0",
+    "totalRefunded": 0.0,
+    "paidOn": 0,
+    "receivedAmt": 0.0,
+    "taxAmount": 0.0,
+    "surcharge": 0.0,
+    "surchargeType": "",
+    "sessionId": "",
+    "refund_availability": "NONE",
+    "refundable_amount": 0.0,
+    "success_redirect": "https://staging.paysecure.net/getResponse.jsp?issucces=true",
+    "failure_redirect": "https://staging.paysecure.net/getResponse.jsp?issucces=false",
+    "cancel_redirect": "",
+    "success_callback": "https://www.google.com/",
+    "failure_callback": "https://staging.paysecure.net/merchant",
+    "platform": "API",
+    "created_from_ip": "103.80.161.238",
+    "checkout_url": "https://newmodules2.choicepay.ca/payments/61837b9e94a79c3002b50e2b9d50a57f/",
+    "direct_post_url": "https://newmodules2.choicepay.ca/api/v1/p/6a55db17fd20a7634e2b6f09/",
+    "payoutProcess": false
+}<br/>
+Email accepted by API: test123@example.com<br/>
+Transaction status OK → proceeding with payment flow<br/>
+Entered Card Holder Name: Yash Bahubali<br/>
+Entered Card Number: 5553042241984105<br/>
+Entered Card Expiry Date: 07/28<br/>
+Entered Card CVV: 123<br/>
+Moved to the Pay button<br/>
+Clicked on the Pay button to proceed with payment<br/>
+FAIL → Exception: invalid session id
+Build info: version: '4.39.0', revision: '126f156aee'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.10'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [e4f896ab2e00a7cf2d17ba9368f850d8, getCurrentUrl {}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 150.0.7871.102, chrome: {chromedriverVersion: 150.0.7871.115 (25f5b661e5b..., userDataDir: C:\Users\LENOVO\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56505}, goog:processID: 92792, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56505/devtoo..., se:cdpVersion: 150.0.7871.102, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: e4f896ab2e00a7cf2d17ba9368f850d8<br/>
+</div>
+</td>
+<td></td>
+<td>816</td>
+<td>purchase.email@5bda80bf</td></tr>
+</table><p>
+</body>
+</html>

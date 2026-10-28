@@ -1,0 +1,336 @@
+package s2s;
+
+import org.testng.annotations.Test;
+
+import com.paysecure.Page.loginPage;
+import com.paysecure.Page.CashierPage;
+import com.paysecure.Page.RouteManager;
+import com.paysecure.Page.payu3dPage;
+import com.paysecure.Page.pspOTPPage;
+import com.paysecure.Page.transactionPage;
+import com.paysecure.base.baseClass;
+import com.paysecure.utilities.DataProviders;
+import com.paysecure.utilities.DataProvidersS2S;
+import com.paysecure.utilities.ExcelWriteUtility;
+import com.paysecure.utilities.PropertyReader;
+import com.paysecure.utilities.generateRandomTestData;
+import com.paysecure.utilities.testData_CreateRoll;
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.Map;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Reporter;
+import org.testng.SkipException;
+import org.testng.annotations.BeforeMethod;
+
+public class zipcode extends baseClass {
+
+	loginPage lp;
+	String checkoutUrl;
+	String purchaseId;
+	CashierPage mcp;
+	transactionPage tp;
+	payu3dPage pay;
+	pspOTPPage otp;
+	String status = "";
+	String comment = "";
+    String baseUri;
+    
+	@BeforeMethod
+	public void beforeMethod() throws InterruptedException {
+		mcp = new CashierPage(getDriver());
+		tp = new transactionPage(getDriver());
+		pay=new payu3dPage(getDriver());
+		otp= new pspOTPPage();
+	}
+
+	@Test(dataProvider ="ZipCodeProvider", dataProviderClass = DataProvidersS2S.class)
+	public void purchaseApi(Map<String, String> cardData , Map<String, String> ZipcodeData ) throws Exception {
+		WebDriver driver = baseClass.getDriver();
+		baseUri = PropertyReader.getPropertyForS2S("baseURI");
+		RestAssured.baseURI = baseUri;
+		String zipCode = ZipcodeData.getOrDefault("TestData", "");
+		String ExpectedStatus = ZipcodeData.getOrDefault("Status", "");
+		String CardHolder = cardData.getOrDefault("CardholderName", "");
+		String CardNumber = cardData.getOrDefault("CardNumber", "");
+		String Expiry = cardData.getOrDefault("Expiry", "");
+		String CVV = cardData.getOrDefault("CVV", "");
+		String PSP = cardData.getOrDefault("PSP", "");
+		String PaymentMethod = cardData.getOrDefault("PaymentMethod","");
+		String Currency = cardData.getOrDefault("Currency", "");
+		String Merchant = cardData.getOrDefault("Merchant", "");
+		String RouteToBankMid = cardData.getOrDefault("RouteToBankMid", "");
+		String RouteToMidOrBank = cardData.getOrDefault("RouteToMidOrBank", "");
+
+		String minAmountStr = cardData.getOrDefault("MinAmount", "");
+		String maxAmountStr = cardData.getOrDefault("MaxAmount", "");
+		String defaultAmountStr = cardData.getOrDefault("DefaultAmount", "");
+
+		double minAmount = testData_CreateRoll.parseAmount(minAmountStr, 0.0);
+		double maxAmount = testData_CreateRoll.parseAmount(maxAmountStr, 0.0);
+		double defaultAmount = testData_CreateRoll.parseAmount(defaultAmountStr, 100.0);
+		System.err.println(zipCode +" "+ExpectedStatus+" "+CardHolder +" "+ CardNumber +" "+ Expiry +" "+ CVV +" "+ PSP);
+
+		if (zipCode.isEmpty() || CardNumber.isEmpty()) {
+			Reporter.log("Skipping test - Empty city or card number", true);
+			throw new SkipException("Empty test data");
+		}
+
+		// ---------- Login BEFORE RouteManager ----------
+		lp = new loginPage(getDriver());
+		lp.login();
+
+		// ---------- Route Manager Configuration ----------
+		RouteManager.ensureRoute(
+				getDriver(),
+				Merchant,
+				Merchant,
+				PaymentMethod,
+				PaymentMethod,
+				Currency,
+				Currency,
+				PSP,
+				RouteToBankMid,
+				RouteToMidOrBank
+		);
+		
+        String token = PropertyReader.getPropertyForS2S("tokenS2S");
+        String BrandID = PropertyReader.getPropertyForS2S("brandIdS2S");
+		String price = generateRandomTestData.generateRandomDoublePrice(minAmount,maxAmount,defaultAmount);
+		String firstName = generateRandomTestData.generateRandomFirstName();
+		String country = "IN";
+		String city = "Paris";
+		String stateCode = "QLD";
+		String emailId = "viratkohli+1@gmail.com";
+		
+		String productname = "Cricket bat";
+		String streetAddress="Lal kothi";
+
+		String requestBody = "{\n" +
+		        "  \"client\": {\n" +
+		        "    \"full_name\": \""+firstName+"\",\n" +
+		        "    \"email\": \""+emailId+"\",\n" +
+		        "    \"country\": \""+country+"\",\n" +
+		        "    \"city\": \""+city+"\",\n" +
+		        "    \"stateCode\": \""+stateCode+"\",\n" +
+		        "    \"street_address\": \""+streetAddress+"\",\n" +
+		        "    \"zip_code\": \""+zipCode+"\",\n" +
+		        "    \"phone\": \"+1111111111\"\n" +
+		        "  },\n" +
+		        "  \"purchase\": {\n" +
+		        "    \"currency\": \""+Currency+"\",\n" +
+		        "    \"products\": [\n" +
+		        "      {\n" +
+		        "        \"name\": \""+productname+"\",\n" +
+		        "        \"price\":"+ price + "\n" +
+		        "      }\n" +
+		        "    ]\n" +
+		        "  },\n" +
+		        "  \"paymentMethod\": \""+PaymentMethod+"\",\n" +
+		        "  \"brand_id\": \"" + BrandID + "\",\n" +
+		        "  \"success_redirect\": \"https://staging.paysecure.net/getResponse.jsp?issucces=true\",\n" +
+		        "  \"failure_redirect\": \"https://staging.paysecure.net/getResponse.jsp?issucces=false\",\n" +
+		        "  \"success_callback\": \"https://www.google.com/\",\n" +
+		        "  \"failure_callback\": \"https://staging.paysecure.net/merchant\"\n" +
+		        "}";
+
+		Response response = RestAssured.given()
+				.header("Authorization", "Bearer " + token)
+				.contentType(ContentType.JSON)
+				.body(requestBody)
+				.when()
+				.post("/api/v1/purchases")
+				.then()
+				.extract()
+				.response();
+
+		System.out.println(response.asPrettyString());
+		purchaseId = response.jsonPath().getString("purchaseId");
+		int status1 = response.getStatusCode();
+
+		if (response.statusCode() == 202) {
+		    purchaseId = response.jsonPath().getString("purchaseId");
+		    Reporter.log("Purchase created successfully with ID: " + purchaseId, true);
+		    
+		    // Add a small delay to ensure purchase is fully persisted
+		    Thread.sleep(2000);
+		    
+		    s2sMethod(zipCode, ExpectedStatus, PSP, CardNumber, Expiry, CVV,PaymentMethod);
+		}
+
+		if (response.statusCode() == 202) {
+			Reporter.log("zipcode accepted by API: " + zipCode, true);
+		} else if (response.statusCode() == 400 || response.statusCode() == 422) {
+            Reporter.log("streetAddress rejected by API: " + zipCode, true);
+            status = "Fail";
+            comment = "PASS → streetAddress rejected correctly " + zipCode;
+
+            Reporter.log(comment, true);
+
+            ExcelWriteUtility.writeResults2s("s2s_Result", zipCode,ExpectedStatus, status, comment, purchaseId,PSP,PaymentMethod);
+            driver.quit();
+            return; 
+        } else {
+			Reporter.log("Unexpected response for streetAddress: " + zipCode + " -> " + response.statusCode(), true);
+		}
+	}
+
+	public void s2sMethod(String zipCode, String ExpectedStatus, String PSP, String CardNumber, String Expiry, String CVV,String PaymentMethod) throws Exception {
+
+		WebDriver driver = baseClass.getDriver();
+
+		if (purchaseId == null || purchaseId.isEmpty()) {
+			Reporter.log("Skipping S2S → purchaseId is NULL (purchase failed)", true);
+			status = "FAIL";
+			comment = "Purchase ID is null, cannot proceed with S2S";
+			ExcelWriteUtility.writeResults2s("s2s_Result", zipCode, ExpectedStatus, "FAIL", comment, "N/A", PSP, PaymentMethod);
+			driver.quit();
+			return;
+		}
+
+		RestAssured.baseURI = baseUri;
+		
+		String endpoint = "/api/v1/p/" + purchaseId + "?s2s=true";
+		System.err.println("S2S Endpoint: " + endpoint);
+		System.err.println("Full URL: " + baseUri + endpoint);
+
+		String url = PropertyReader.getPropertyForS2S("url");
+		String token = PropertyReader.getPropertyForS2S("tokenS2S");
+		String brandId = PropertyReader.getPropertyForS2S("brandIdS2S");
+	  
+	    
+	    
+	    String requestBody =
+	    		"{\n" +
+	    		"  \"cardholder_name\": \"Rahul Agarwal\",\n" +
+	    		"  \"card_number\": \"" + CardNumber + "\",\n" +
+	    		"  \"expires\": \"" + Expiry + "\",\n" +
+	    		"  \"cvc\": \"" + CVV + "\",\n" +
+	    		"  \"remember_card\": \"on\",\n" +
+	    		"  \"remote_ip\": \"157.38.242.7\",\n" +
+	    		"  \"user_agent\": \"Mozilla/5.0\",\n" +
+	    		"  \"accept_header\": \"text/html\",\n" +
+	    		"  \"language\": \"en-US\",\n" +
+	    		"  \"java_enabled\": false,\n" +
+	    		"  \"javascript_enabled\": true,\n" +
+	    		"  \"color_depth\": 24,\n" +
+	    		"  \"utc_offset\": 0,\n" +
+	    		"  \"screen_width\": 1920,\n" +
+	    		"  \"screen_height\": 1080\n" +
+	    		"}";
+
+		Response response = RestAssured.given()
+				.header("Authorization", "Bearer " + token)
+				.header("Accept", "application/json")
+				.header("brandId", brandId)
+				.contentType(ContentType.JSON)
+				.body(requestBody)
+				.post(endpoint);
+
+	    
+	    if (response == null || response.statusCode() != 202) {
+	        status = "FAIL";
+	        comment = "S2S call failed with status: " + (response != null ? response.statusCode() : "NULL");
+	        Reporter.log(comment, true);
+	        ExcelWriteUtility.writeResults2s("s2s_Result", zipCode,ExpectedStatus, status, comment, purchaseId,PSP,PaymentMethod);
+	        driver.quit();
+	        return;
+	    }
+
+	    // Validate callback URL
+	    String callback_url = response.jsonPath().getString("callback_url");
+
+	    if (callback_url == null || callback_url.isEmpty()) {
+	        Reporter.log("callback_url is NULL → Payment failed due to S2S error", true);
+
+	        status = "FAIL";
+	        comment = "callback_url null for currency " + purchaseId;
+	        ExcelWriteUtility.writeResults2s("s2s_Result", zipCode,ExpectedStatus, status, comment, purchaseId,PSP,PaymentMethod);
+	        driver.quit();
+	        return;
+	    }
+
+	    driver.get(callback_url);
+	    if(PSP.equalsIgnoreCase("payu")) {
+	    	pay.payForPayu(zipCode,purchaseId,ExpectedStatus,PaymentMethod);
+	    }
+
+	    otp.enterOTP(PSP);
+	    
+	    Thread.sleep(7000);
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.urlContains("issucces"));
+
+        String redirectUrl = driver.getCurrentUrl();
+        Reporter.log("Redirected URL: " + redirectUrl, true);
+
+        String flag = Arrays.stream(redirectUrl.split("\\?")[1].split("&"))
+                .filter(p -> p.startsWith("issucces="))
+                .map(p -> p.split("=")[1])
+                .findFirst().orElse("");
+        System.err.println(flag);
+        String actualOutcome;
+        if (flag.equalsIgnoreCase("false")) {
+        	actualOutcome = "FAIL";
+            if (ExpectedStatus != null && ExpectedStatus.equalsIgnoreCase("Fail")) {
+                status = "PASS"; // Test passed - failure was expected
+                comment = "PASS → Payment failed as expected";
+            } else {
+                status = "FAIL"; // Test failed - expected success but got failure
+                comment = "FAIL → Payment failed but expected to pass";
+            }
+
+            Reporter.log(comment, true);
+
+            ExcelWriteUtility.writeResults2s("s2s_Result", zipCode,ExpectedStatus, actualOutcome, comment, purchaseId,PSP,PaymentMethod);
+            driver.quit();
+            return;
+        }
+        else if (flag.equalsIgnoreCase("true")) {
+            actualOutcome = "PASS";
+            
+            // Payment succeeded - check if success was expected
+            if (ExpectedStatus != null && ExpectedStatus.equalsIgnoreCase("Pass")) {
+                status = "PASS"; // Test passed - success was expected
+                comment = "PASS → Payment succeeded as expected";
+            } else {
+                status = "FAIL"; // Test failed - expected failure but got success
+                comment = "FAIL → Payment succeeded but expected to fail";
+            }
+            
+
+            Reporter.log(comment, true);
+
+            ExcelWriteUtility.writeResults2s("s2s_Result", zipCode,ExpectedStatus, actualOutcome, comment, purchaseId,PSP,PaymentMethod);
+
+        }
+        else {
+        	 actualOutcome = "UNKNOWN";
+            status = "UNKNOWN";
+            comment = "URL does not contain expected issucces parameter";
+
+            Reporter.log(comment, true);
+
+            ExcelWriteUtility.writeResults2s("s2s_Result", zipCode,ExpectedStatus, actualOutcome, comment, purchaseId,PSP,PaymentMethod);
+        }
+        
+		mcp.openBrowserForStaging(driver,url);
+		lp.login();
+		tp.navigateUptoTransaction();
+		tp.searchTheTransaction(purchaseId);
+		tp.searchButton();
+		tp.clickOnTransactionId();
+        tp.verifyPurchaseTransactionIDIsNotEmpty();
+        Thread.sleep(3000);
+        driver.quit();
+	}
+}

@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "https://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>TestNG Report</title>
+<style type="text/css">table {margin-bottom:10px;border-collapse:collapse;empty-cells:show}th,td {border:1px solid #009;padding:.25em .5em}th {vertical-align:bottom}td {vertical-align:top}table a {font-weight:bold}.stripe td {background-color: #E6EBF9}.num {text-align:right}.passedodd td {background-color: #3F3}.passedeven td {background-color: #0A0}.skippedodd td {background-color: #DDD}.skippedeven td {background-color: #CCC}.failedodd td,.attn {background-color: #F33}.failedeven td,.stripe .attn {background-color: #D00}.stacktrace {white-space:pre;font-family:monospace}.totop {font-size:85%;text-align:center;border-bottom:2px solid #000}.invisible {display:none}</style>
+</head>
+<body>
+<table>
+<tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
+<tr><th colspan="8">Default suite</th></tr>
+<tr><td><a href="#t0">Default test</a></td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">960,055</td><td></td><td></td></tr>
+</table>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Default suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Default test &#8212; passed</th></tr><tr class="passedeven"><td rowspan="1">purchase.email</td><td><a href="#m0">Purchase</a></td><td rowspan="1">1784011414213</td><td rowspan="1">938422</td></tr></tbody>
+</table>
+<h2>Default test</h2><h3 id="m0">purchase.email#Purchase</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>{CardNumber=5553042241984105, CVV=123, RunFlag=TRUE, RouteToMidOrBank=easebuzz_card, PartialMerchant=Suhas, PSP=easybuzz, MaxAmount=100, CardholderName=Yash Bahubali, Merchant=SuhasM, RouteToBankMid=Route to Mid, Currency=INR, MinAmount=10, DefaultAmount=100, PaymentMethod=MASTER, Expiry=07/28}</td><td>{Status=Pass, TestData=test123@example.com}</td></tr><tr><th colspan="2">Messages</th></tr><tr><td colspan="2"><div class="messages">Email test case will run for this PSP: easybuzz<br/>Amount Inputs → Min: 10.0, Max: 100.0, Provided: 100.0<br/>✅ Boundary amount provided explicitly: 100.0<br/>Generated First Name: div91f<br/>Purchase ID: 6a55da9cfd20a7634e2b6e6f<br/>Checkout URL: https://newmodules2.choicepay.ca/payments/286eb6029aa254fd2c998e29ccb761fb/<br/>Email: test123@example.com → HTTP Status: 202<br/>Response Body: {
+    "purchaseId": "6a55da9cfd20a7634e2b6e6f",
+    "client": {
+        "customerId": "NA",
+        "email": "test123@example.com",
+        "phone": "+1111111111",
+        "full_name": "div91f",
+        "street_address": "Main gate",
+        "country": "US",
+        "city": "Paris",
+        "zip_code": "20001",
+        "cc": [
+            
+        ],
+        "bcc": [
+            
+        ],
+        "stateCode": "QLD"
+    },
+    "updated_on": 1784011420,
+    "type": "purchase",
+    "paymentMethod": "MASTER",
+    "amountUnit": "MAJOR",
+    "errorMsg": "",
+    "errorCode": "NA",
+    "force_recurring": false,
+    "created_on": 1784011420,
+    "smartRetryCount": 0,
+    "smartRetry": false,
+    "merchantRef": "6a55da9cfd20a7634e2b6e6f",
+    "purchase": {
+        "currency": "INR",
+        "products": [
+            {
+                "name": "Cricket bat",
+                "quantity": 1.0,
+                "price": 100.0,
+                "discount": 0,
+                "tax_percent": "0.00"
+            }
+        ],
+        "total": 100.0,
+        "requestAmount": 100.0,
+        "language": "en",
+        "notes": "",
+        "debt": 0,
+        "total_formatted": 1.0,
+        "taxAmount": 0.0,
+        "taxPercent": 0.0,
+        "request_client_details": [
+            
+        ],
+        "timezone": "MIT",
+        "email_message": ""
+    },
+    "issuer_details": {
+        "website": "",
+        "legal_street_address": "",
+        "legal_country": "",
+        "legal_city": "",
+        "legal_zip_code": "",
+        "bank_accounts": [
+            {
+                
+            }
+        ],
+        "legal_name": "TestBrandId",
+        "brand_name": "TestBrandId",
+        "registration_number": "",
+        "tax_number": ""
+    },
+    "transaction_data": {
+        "payment_method": "",
+        "flow": "payform",
+        "extra": {
+            
+        },
+        "country": "",
+        "attempts": [
+            
+        ]
+    },
+    "status": "CREATED",
+    "status_history": [
+        {
+            "status": "created",
+            "timestamp": 1784011420
+        }
+    ],
+    "is_test": false,
+    "brand_id": "dd3f7271-ae31-4961-a37d-dcfec0817470",
+    "send_receipt": false,
+    "is_recurring_token": false,
+    "skip_capture": false,
+    "reference_generated": "PS2435",
+    "issued": "2026-07-14",
+    "due": 1784011420,
+    "refund_upto": 0,
+    "cc_descriptor": "",
+    "fraudScore": "NA",
+    "trustScore": "NA",
+    "extraFee": "0",
+    "totalRefunded": 0.0,
+    "paidOn": 0,
+    "receivedAmt": 0.0,
+    "taxAmount": 0.0,
+    "surcharge": 0.0,
+    "surchargeType": "",
+    "sessionId": "",
+    "refund_availability": "NONE",
+    "refundable_amount": 0.0,
+    "success_redirect": "https://staging.paysecure.net/getResponse.jsp?issucces=true",
+    "failure_redirect": "https://staging.paysecure.net/getResponse.jsp?issucces=false",
+    "cancel_redirect": "",
+    "success_callback": "https://www.google.com/",
+    "failure_callback": "https://staging.paysecure.net/merchant",
+    "platform": "API",
+    "created_from_ip": "103.80.161.238",
+    "checkout_url": "https://newmodules2.choicepay.ca/payments/286eb6029aa254fd2c998e29ccb761fb/",
+    "direct_post_url": "https://newmodules2.choicepay.ca/api/v1/p/6a55da9cfd20a7634e2b6e6f/",
+    "payoutProcess": false
+}<br/>Email accepted by API: test123@example.com<br/>Transaction status OK → proceeding with payment flow<br/>Entered Card Holder Name: Yash Bahubali<br/>Entered Card Number: 5553042241984105<br/>Entered Card Expiry Date: 07/28<br/>Entered Card CVV: 123<br/>Moved to the Pay button<br/>Clicked on the Pay button to proceed with payment<br/>FAIL → Exception: invalid session id
+Build info: version: '4.39.0', revision: '126f156aee'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.10'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [de267eb74630b077c8c6f7d3f099ae35, getCurrentUrl {}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 150.0.7871.102, chrome: {chromedriverVersion: 150.0.7871.115 (25f5b661e5b..., userDataDir: C:\Users\LENOVO\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:54932}, goog:processID: 76992, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:54932/devtoo..., se:cdpVersion: 150.0.7871.102, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: de267eb74630b077c8c6f7d3f099ae35</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+</body>
+</html>

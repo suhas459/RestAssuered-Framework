@@ -1,0 +1,42 @@
+[
+    {
+        "Country": "ZZ",
+        "CardHolder": "AB de Villiers",
+		"CardNumber": "5553042241984105",
+			"Expiry": "07/28",
+			"CVV": "123",
+		    "RunFlag": "Master05",
+			"ExpectedStatus": "Fail",
+			"PSP" :"Easybuzz"
+    },
+    {
+        "Country": "XYZ",
+        "CardHolder": "AB de Villiers",
+		"CardNumber": "5553042241984105",
+			"Expiry": "07/28",
+			"CVV": "123",
+		    "RunFlag": "Master05",
+			"ExpectedStatus": "Fail",
+			"PSP" :"Easybuzz"
+    },
+    {
+        "Country": "IN R",
+        "CardHolder": "AB de Villiers",
+		"CardNumber": "5553042241984105",
+			"Expiry": "07/28",
+			"CVV": "123",
+		    "RunFlag": "Master05",
+			"ExpectedStatus": "Fail",
+			"PSP" :"Easybuzz"
+},
+    {
+        "Country": "IN",
+        "CardHolder": "AB de Villiers",
+		"CardNumber": "5553042241984105",
+			"Expiry": "07/28",
+			"CVV": "123",
+		    "RunFlag": "Master4105",
+			"ExpectedStatus": "Pass",
+			"PSP" :"Easybuzz"
+}
+]

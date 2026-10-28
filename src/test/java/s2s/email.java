@@ -1,0 +1,269 @@
+package s2s;
+
+import org.testng.annotations.Test;
+
+import com.paysecure.Page.loginPage;
+import com.paysecure.Page.CashierPage;
+import com.paysecure.Page.RouteManager;
+import com.paysecure.Page.payu3dPage;
+import com.paysecure.Page.pspOTPPage;
+import com.paysecure.Page.transactionPage;
+import com.paysecure.base.baseClass;
+import com.paysecure.utilities.DataProvidersS2S;
+import com.paysecure.utilities.ExcelWriteUtility;
+import com.paysecure.utilities.PropertyReader;
+import com.paysecure.utilities.generateRandomTestData;
+import com.paysecure.utilities.testData_CreateRoll;
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.Map;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Reporter;
+import org.testng.SkipException;
+import org.testng.annotations.BeforeMethod;
+
+public class email extends baseClass {
+
+	private WebDriver driver;
+	loginPage lp;
+	String purchaseId;
+	CashierPage mcp;
+	transactionPage tp;
+	payu3dPage pay;
+	pspOTPPage otp;
+
+	String testResult = "";
+	String comment = "";
+	String baseUri;
+
+	@BeforeMethod
+	public void beforeMethod() {
+		mcp = new CashierPage(getDriver());
+		tp = new transactionPage(getDriver());
+		pay = new payu3dPage(getDriver(
+				));
+		otp = new pspOTPPage();
+		
+	}
+	
+	@Test(dataProvider = "EmailData", dataProviderClass = DataProvidersS2S.class)
+	public void purchaseApi(
+	        Map<String, String> cardData,Map<String, String> emailData) throws Exception {
+
+		driver = baseClass.getDriver();
+
+		// ---------- Email data ----------
+		String Email = emailData.getOrDefault("TestData", "");
+		String ExpectedStatus = emailData.getOrDefault("Status", "Pass");
+
+		// ---------- Card & Routing data ----------
+		String CardNumber = cardData.getOrDefault("CardNumber", "");
+		String Expiry = cardData.getOrDefault("Expiry", "");
+		String CVV = cardData.getOrDefault("CVV", "");
+		String PSP = cardData.getOrDefault("PSP", "");
+		String PaymentMethod = cardData.getOrDefault("PaymentMethod", "");
+		String Currency = cardData.getOrDefault("Currency", "");
+
+		String Merchant = cardData.getOrDefault("Merchant", "");
+		String RouteToBankMid = cardData.getOrDefault("RouteToBankMid", "");
+		String RouteToMidOrBank = cardData.getOrDefault("RouteToMidOrBank", "");
+
+		String minAmountStr = cardData.getOrDefault("MinAmount", "");
+		String maxAmountStr = cardData.getOrDefault("MaxAmount", "");
+		String defaultAmountStr = cardData.getOrDefault("DefaultAmount", "");
+
+		double minAmount = testData_CreateRoll.parseAmount(minAmountStr, 0.0);
+		double maxAmount = testData_CreateRoll.parseAmount(maxAmountStr, 0.0);
+		double defaultAmount = testData_CreateRoll.parseAmount(defaultAmountStr, 100.0);
+
+		// ---------- Basic validation ----------
+		if (Email.isEmpty() || CardNumber.isEmpty()) {
+			Reporter.log("Skipping test - Empty email data", true);
+			throw new SkipException("Empty test data");
+		}
+		
+
+
+		// ---------- Login BEFORE RouteManager ----------
+		lp = new loginPage(getDriver());
+		lp.login();
+
+		// ---------- Route Manager Configuration ----------
+//		RouteManager.ensureRoute(
+//				getDriver(),
+//				Merchant,
+//				Merchant,
+//				PaymentMethod,
+//				PaymentMethod,
+//				Currency,
+//				Currency,
+//				PSP,
+//				RouteToBankMid,
+//				RouteToMidOrBank
+//		);
+
+		Reporter.log("Routing applied → PSP: " + PSP + ", RouteTo: " + RouteToMidOrBank, true);
+
+		// ---------- Purchase API ----------
+		baseUri = PropertyReader.getPropertyForS2S("baseURI");
+		RestAssured.baseURI = baseUri;
+
+		String token = PropertyReader.getPropertyForS2S("tokenS2S");
+		String BrandID = PropertyReader.getPropertyForS2S("brandIdS2S");
+
+		String price = generateRandomTestData.generateRandomDoublePrice(minAmount, maxAmount, defaultAmount);
+		String firstName = generateRandomTestData.generateRandomFirstName();
+
+		String country = "IN";
+		String city = "Paris";
+		String stateCode = "QLD";
+		
+		String zipcode="10001";
+		String productname = "Cricket bat";
+		String streetAddress="Lal kothi";
+
+		String requestBody = "{\n" +
+		        "  \"client\": {\n" +
+		        "    \"full_name\": \""+firstName+"\",\n" +
+		        "    \"email\": \""+Email+"\",\n" +
+		        "    \"country\": \""+country+"\",\n" +
+		        "    \"city\": \""+city+"\",\n" +
+		        "    \"stateCode\": \""+stateCode+"\",\n" +
+		        "    \"street_address\": \""+streetAddress+"\",\n" +
+		        "    \"zip_code\": \""+zipcode+"\",\n" +
+		        "    \"phone\": \"+1111111111\"\n" +
+		        "  },\n" +
+		        "  \"purchase\": {\n" +
+		        "    \"currency\": \""+Currency+"\",\n" +
+		        "    \"products\": [\n" +
+		        "      {\n" +
+		        "        \"name\": \""+productname+"\",\n" +
+		        "        \"price\":"+ price + "\n" +
+		        "      }\n" +
+		        "    ]\n" +
+		        "  },\n" +
+		        "  \"paymentMethod\": \""+PaymentMethod+"\",\n" +
+				"  \"brand_id\": \"" + BrandID + "\",\n" +
+				"  \"success_redirect\": \"https://staging.paysecure.net/getResponse.jsp?issucces=true\",\n" +
+				"  \"failure_redirect\": \"https://staging.paysecure.net/getResponse.jsp?issucces=false\",\n" +
+				"  \"success_callback\": \"https://www.google.com/\",\n" +
+				"  \"failure_callback\": \"https://staging.paysecure.net/merchant\"\n" +
+				"}";
+
+		Response response = RestAssured.given()
+				.header("Authorization", "Bearer " + token)
+				.contentType(ContentType.JSON)
+				.body(requestBody)
+				.post("/api/v1/purchases");
+
+		int statusCode = response.getStatusCode();
+
+		System.out.println(response.asPrettyString());
+		
+
+		if (statusCode == 202) {
+			purchaseId = response.jsonPath().getString("purchaseId");
+			Reporter.log("Purchase created successfully with ID: " + purchaseId, true);
+			
+			
+			Thread.sleep(1000);
+			s2sMethod(Email, ExpectedStatus, PSP, CardNumber, Expiry, CVV, PaymentMethod);
+			
+		} else if (statusCode == 400 || statusCode == 422) {
+			Reporter.log("City rejected by API: " + Email, true);
+			
+			String actualOutcome = "FAIL";
+			
+			if (ExpectedStatus.equalsIgnoreCase("Fail")) {
+				testResult = "PASS";
+				comment = "City rejected as expected";
+			} else {
+				testResult = "FAIL";
+				comment = "City rejected but expected to pass";
+			}
+
+			Reporter.log(comment, true);
+			ExcelWriteUtility.writeResults2s("s2s_Result", Email, ExpectedStatus, actualOutcome, comment, purchaseId != null ? purchaseId : "N/A", PSP, PaymentMethod);
+			driver.quit();
+			return;
+			
+		} else {
+			Reporter.log("Unexpected response for city: " + Email + " -> Status: " + statusCode, true);
+			testResult = "FAIL";
+			comment = "Unexpected API response (Status: " + statusCode + ")";
+			ExcelWriteUtility.writeResults2s("s2s_Result", Email, ExpectedStatus, "UNKNOWN", comment, purchaseId != null ? purchaseId : "N/A", PSP, PaymentMethod);
+			driver.quit();
+			return;
+		}
+	}
+
+	// ======================= S2S FLOW =======================
+
+	public void s2sMethod(String Email, String ExpectedStatus, String PSP,
+	        String CardNumber, String Expiry, String CVV, String PaymentMethod) throws Exception {
+
+		WebDriver driver = baseClass.getDriver();
+
+
+
+        RestAssured.baseURI = baseUri;
+		
+		String endpoint = "/api/v1/p/" + purchaseId + "?s2s=true";
+		System.err.println("S2S Endpoint: " + endpoint);
+		System.err.println("Full URL: " + baseUri + endpoint);
+
+		String url = PropertyReader.getPropertyForS2S("url");
+		String token = PropertyReader.getPropertyForS2S("tokenS2S");
+		String brandId = PropertyReader.getPropertyForS2S("brandIdS2S");
+
+		String requestBody =
+				"{\n" +
+				"  \"cardholder_name\": \"Rahul Agarwal\",\n" +
+				"  \"card_number\": \"" + CardNumber + "\",\n" +
+				"  \"expires\": \"" + Expiry + "\",\n" +
+				"  \"cvc\": \"" + CVV + "\",\n" +
+				"  \"remember_card\": \"on\",\n" +
+				"  \"remote_ip\": \"157.38.242.7\",\n" +
+				"  \"user_agent\": \"Mozilla/5.0\",\n" +
+				"  \"accept_header\": \"text/html\",\n" +
+				"  \"language\": \"en-US\",\n" +
+				"  \"java_enabled\": false,\n" +
+				"  \"javascript_enabled\": true,\n" +
+				"  \"color_depth\": 24,\n" +
+				"  \"utc_offset\": 0,\n" +
+				"  \"screen_width\": 1920,\n" +
+				"  \"screen_height\": 1080\n" +
+				"}";
+		
+		Response response = RestAssured.given()
+				.header("Authorization", "Bearer " + token)
+				.header("Accept", "application/json")
+				.header("brandId", brandId)
+				.contentType(ContentType.JSON)
+				.body(requestBody)
+				.post(endpoint);
+		
+		System.out.println(response.asPrettyString());
+
+
+
+		String callback_url = response.jsonPath().getString("callback_url");
+
+
+
+		driver.get(callback_url);
+	//	otp.enterOTP(PSP);
+
+
+	
+	//	driver.quit();
+	}
+}

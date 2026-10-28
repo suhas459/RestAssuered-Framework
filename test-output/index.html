@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  <meta charset='utf-8'>
+  <title>TestNG reports</title>
+
+    <link type="text/css" href="testng-reports1.css" rel="stylesheet" id="ultra" />
+    <link type="text/css" href="testng-reports.css" rel="stylesheet" id="retro" disabled="false"/>
+    <script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="testng-reports.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type='text/javascript'>
+      google.load('visualization', '1', {packages:['table']});
+      google.setOnLoadCallback(drawTable);
+      var suiteTableInitFunctions = new Array();
+      var suiteTableData = new Array();
+    </script>
+    <!--
+      <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
+     -->
+  </head>
+
+  <body>    <div class="top-banner-root">
+      <span class="top-banner-title-font">Test results</span>
+      <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
+      <br/>
+      <span class="top-banner-font-1">1 suite</span>
+    </div> <!-- top-banner-root -->
+    <div class="navigator-root">
+      <div class="navigator-suite-header">
+        <span>All suites</span>
+        <a href="#" title="Collapse/expand all the suites" class="collapse-all-link">
+          <img src="collapseall.gif" class="collapse-all-icon">
+          </img> <!-- collapse-all-icon -->
+        </a> <!-- collapse-all-link -->
+      </div> <!-- navigator-suite-header -->
+      <div class="suite">
+        <div class="rounded-window">
+          <div class="suite-header light-rounded-window-top">
+            <a href="#" panel-name="suite-Default_suite" class="navigator-link">
+              <span class="suite-name border-passed">Default suite</span>
+            </a> <!-- navigator-link -->
+          </div> <!-- suite-header light-rounded-window-top -->
+          <div class="navigator-suite-content">
+            <div class="suite-section-title">
+              <span>Info</span>
+            </div> <!-- suite-section-title -->
+            <div class="suite-section-content">
+              <ul>
+                <li>
+                  <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
+                    <span>C:\Users\LENOVO\AppData\Local\Temp\testng-eclipse-528818275\testng-customsuite.xml</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="testlist-Default_suite" class="navigator-link ">
+                    <span class="test-stats">1 test</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="group-Default_suite" class="navigator-link ">
+                    <span>0 groups</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="times-Default_suite" class="navigator-link ">
+                    <span>Times</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="reporter-Default_suite" class="navigator-link ">
+                    <span>Reporter output</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="ignored-methods-Default_suite" class="navigator-link ">
+                    <span>Ignored methods</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="chronological-Default_suite" class="navigator-link ">
+                    <span>Chronological view</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+              </ul>
+            </div> <!-- suite-section-content -->
+            <div class="result-section">
+              <div class="suite-section-title">
+                <span>Results</span>
+              </div> <!-- suite-section-title -->
+              <div class="suite-section-content">
+                <ul>
+                  <li>
+                    <span class="method-stats">1 method,   1 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title passed">Passed methods</span>
+                    <span class="show-or-hide-methods passed">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods passed suite-Default_suite"> (hide)</a> <!-- hide-methods passed suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods passed suite-Default_suite"> (show)</a> <!-- show-methods passed suite-Default_suite -->
+                    </span>
+                    <div class="method-list-content passed suite-Default_suite">
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="purchase.email" class="method navigator-link" hash-for-method="Purchase({CardNumber=5553042241984105, CVV=123, RunFlag=TRUE, RouteToMidOrBank=easebuzz_card, PartialMerchant...)">Purchase({CardNumber=5553042241984105, CVV=123, RunFlag=TRUE, RouteToMidOrBank=easebuzz_card, PartialMerchant...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content passed suite-Default_suite -->
+                  </li>
+                </ul>
+              </div> <!-- suite-section-content -->
+            </div> <!-- result-section -->
+          </div> <!-- navigator-suite-content -->
+        </div> <!-- rounded-window -->
+      </div> <!-- suite -->
+    </div> <!-- navigator-root -->
+    <div class="wrapper">
+      <div class="main-panel-root">
+        <div panel-name="suite-Default_suite" class="panel Default_suite">
+          <div class="suite-Default_suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">purchase.email</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="Purchase({CardNumber=5553042241984105, CVV=123, RunFlag=TRUE, RouteToMidOrBank=easebuzz_card, PartialMerchant...)">
+                  </a> <!-- Purchase({CardNumber=5553042241984105, CVV=123, RunFlag=TRUE, RouteToMidOrBank=easebuzz_card, PartialMerchant...) -->
+                  <span class="method-name">Purchase</span>
+                  <span class="parameters">({CardNumber=5553042241984105, CVV=123, RunFlag=TRUE, RouteToMidOrBank=easebuzz_card, PartialMerchant=Suhas, PSP=easybuzz, MaxAmount=100, CardholderName=Yash Bahubali, Merchant=SuhasM, RouteToBankMid=Route to Mid, Currency=INR, MinAmount=10, DefaultAmount=100, PaymentMethod=MASTER, Expiry=07/28},{Status=Pass, TestData=test123@example.com})</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Default_suite-class-passed -->
+        </div> <!-- panel Default_suite -->
+        <div panel-name="test-xml-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">C:\Users\LENOVO\AppData\Local\Temp\testng-eclipse-528818275\testng-customsuite.xml</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
+&lt;suite name=&quot;Default suite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
+  &lt;test thread-count=&quot;5&quot; name=&quot;Default test&quot; verbose=&quot;2&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;purchase.email&quot;&gt;
+        &lt;methods&gt;
+          &lt;include name=&quot;Purchase&quot;/&gt;
+        &lt;/methods&gt;
+      &lt;/class&gt; &lt;!-- purchase.email --&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Default test --&gt;
+&lt;/suite&gt; &lt;!-- Default suite --&gt;
+            </pre>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="testlist-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Tests for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <ul>
+              <li>
+                <span class="test-name">Default test (1 class)</span>
+              </li>
+            </ul>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="group-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Groups for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="times-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Times for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="times-div">
+              <script type="text/javascript">
+suiteTableInitFunctions.push('tableData_Default_suite');
+function tableData_Default_suite() {
+var data = new google.visualization.DataTable();
+data.addColumn('number', 'Number');
+data.addColumn('string', 'Method');
+data.addColumn('string', 'Class');
+data.addColumn('number', 'Time (ms)');
+data.addRows(1);
+data.setCell(0, 0, 0)
+data.setCell(0, 1, 'Purchase')
+data.setCell(0, 2, 'purchase.email')
+data.setCell(0, 3, 938422);
+window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
+return data;
+}
+              </script>
+              <span class="suite-total-time">Total running time: 15 minutes</span>
+              <div id="times-div-Default_suite">
+              </div> <!-- times-div-Default_suite -->
+            </div> <!-- times-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="reporter-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Reporter output for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">Purchase({CardNumber=5553042241984105, CVV=123, RunFlag=TRUE, RouteToMidOrBank=easebuzz_card, PartialMerchant...)</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Email test case will run for this PSP: easybuzz</span>
+                <span class="reporter-method-output">Amount Inputs → Min: 10.0, Max: 100.0, Provided: 100.0</span>
+                <span class="reporter-method-output">✅ Boundary amount provided explicitly: 100.0</span>
+                <span class="reporter-method-output">Generated First Name: div91f</span>
+                <span class="reporter-method-output">Purchase ID: 6a55da9cfd20a7634e2b6e6f</span>
+                <span class="reporter-method-output">Checkout URL: https://newmodules2.choicepay.ca/payments/286eb6029aa254fd2c998e29ccb761fb/</span>
+                <span class="reporter-method-output">Email: test123@example.com → HTTP Status: 202</span>
+                <span class="reporter-method-output">Response Body: {
+    "purchaseId": "6a55da9cfd20a7634e2b6e6f",
+    "client": {
+        "customerId": "NA",
+        "email": "test123@example.com",
+        "phone": "+1111111111",
+        "full_name": "div91f",
+        "street_address": "Main gate",
+        "country": "US",
+        "city": "Paris",
+        "zip_code": "20001",
+        "cc": [
+            
+        ],
+        "bcc": [
+            
+        ],
+        "stateCode": "QLD"
+    },
+    "updated_on": 1784011420,
+    "type": "purchase",
+    "paymentMethod": "MASTER",
+    "amountUnit": "MAJOR",
+    "errorMsg": "",
+    "errorCode": "NA",
+    "force_recurring": false,
+    "created_on": 1784011420,
+    "smartRetryCount": 0,
+    "smartRetry": false,
+    "merchantRef": "6a55da9cfd20a7634e2b6e6f",
+    "purchase": {
+        "currency": "INR",
+        "products": [
+            {
+                "name": "Cricket bat",
+                "quantity": 1.0,
+                "price": 100.0,
+                "discount": 0,
+                "tax_percent": "0.00"
+            }
+        ],
+        "total": 100.0,
+        "requestAmount": 100.0,
+        "language": "en",
+        "notes": "",
+        "debt": 0,
+        "total_formatted": 1.0,
+        "taxAmount": 0.0,
+        "taxPercent": 0.0,
+        "request_client_details": [
+            
+        ],
+        "timezone": "MIT",
+        "email_message": ""
+    },
+    "issuer_details": {
+        "website": "",
+        "legal_street_address": "",
+        "legal_country": "",
+        "legal_city": "",
+        "legal_zip_code": "",
+        "bank_accounts": [
+            {
+                
+            }
+        ],
+        "legal_name": "TestBrandId",
+        "brand_name": "TestBrandId",
+        "registration_number": "",
+        "tax_number": ""
+    },
+    "transaction_data": {
+        "payment_method": "",
+        "flow": "payform",
+        "extra": {
+            
+        },
+        "country": "",
+        "attempts": [
+            
+        ]
+    },
+    "status": "CREATED",
+    "status_history": [
+        {
+            "status": "created",
+            "timestamp": 1784011420
+        }
+    ],
+    "is_test": false,
+    "brand_id": "dd3f7271-ae31-4961-a37d-dcfec0817470",
+    "send_receipt": false,
+    "is_recurring_token": false,
+    "skip_capture": false,
+    "reference_generated": "PS2435",
+    "issued": "2026-07-14",
+    "due": 1784011420,
+    "refund_upto": 0,
+    "cc_descriptor": "",
+    "fraudScore": "NA",
+    "trustScore": "NA",
+    "extraFee": "0",
+    "totalRefunded": 0.0,
+    "paidOn": 0,
+    "receivedAmt": 0.0,
+    "taxAmount": 0.0,
+    "surcharge": 0.0,
+    "surchargeType": "",
+    "sessionId": "",
+    "refund_availability": "NONE",
+    "refundable_amount": 0.0,
+    "success_redirect": "https://staging.paysecure.net/getResponse.jsp?issucces=true",
+    "failure_redirect": "https://staging.paysecure.net/getResponse.jsp?issucces=false",
+    "cancel_redirect": "",
+    "success_callback": "https://www.google.com/",
+    "failure_callback": "https://staging.paysecure.net/merchant",
+    "platform": "API",
+    "created_from_ip": "103.80.161.238",
+    "checkout_url": "https://newmodules2.choicepay.ca/payments/286eb6029aa254fd2c998e29ccb761fb/",
+    "direct_post_url": "https://newmodules2.choicepay.ca/api/v1/p/6a55da9cfd20a7634e2b6e6f/",
+    "payoutProcess": false
+}</span>
+                <span class="reporter-method-output">Email accepted by API: test123@example.com</span>
+                <span class="reporter-method-output">Transaction status OK → proceeding with payment flow</span>
+                <span class="reporter-method-output">Entered Card Holder Name: Yash Bahubali</span>
+                <span class="reporter-method-output">Entered Card Number: 5553042241984105</span>
+                <span class="reporter-method-output">Entered Card Expiry Date: 07/28</span>
+                <span class="reporter-method-output">Entered Card CVV: 123</span>
+                <span class="reporter-method-output">Moved to the Pay button</span>
+                <span class="reporter-method-output">Clicked on the Pay button to proceed with payment</span>
+                <span class="reporter-method-output">FAIL → Exception: invalid session id
+Build info: version: '4.39.0', revision: '126f156aee'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.10'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [de267eb74630b077c8c6f7d3f099ae35, getCurrentUrl {}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 150.0.7871.102, chrome: {chromedriverVersion: 150.0.7871.115 (25f5b661e5b..., userDataDir: C:\Users\LENOVO\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:54932}, goog:processID: 76992, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:54932/devtoo..., se:cdpVersion: 150.0.7871.102, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: de267eb74630b077c8c6f7d3f099ae35</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="ignored-methods-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">0 ignored methods</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="chronological-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Methods in chronological order</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="chronological-class">
+              <div class="chronological-class-name">purchase.email</div> <!-- chronological-class-name -->
+              <div class="configuration-suite before">
+                <span class="method-name">loadConfig</span>
+                <span class="method-start">0 ms</span>
+              </div> <!-- configuration-suite before -->
+              <div class="configuration-suite before">
+                <span class="method-name">clearOnce</span>
+                <span class="method-start">55 ms</span>
+              </div> <!-- configuration-suite before -->
+              <div class="configuration-method before">
+                <span class="method-name">setup</span>
+                <span class="method-start">2836 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">beforeMethod</span>
+                <span class="method-start">11267 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">Purchase({CardNumber=5553042241984105, CVV=123, RunFlag=TRUE, RouteToMidOrBank=easebuzz_card, PartialMerchant...)</span>
+                <span class="method-start">18614 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=Purchase status=SUCCESS method=email.Purchase(java.util.Map,java.util.Map)[pri:0, i...)</span>
+                <span class="method-start">957056 ms</span>
+              </div> <!-- configuration-method after -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+      </div> <!-- main-panel-root -->
+    </div> <!-- wrapper -->
+  </body>
+<script type="text/javascript" src="testng-reports2.js"></script>
+</html>
